@@ -1,0 +1,61 @@
+{
+  "questions": [
+    {
+      "id": "ventricularFibrillation",
+      "text": "Has the patient experienced ventricular fibrillation in the last 30 days?",
+      "type": "radio",
+      "required": true,
+      "visible": true,
+      "options": [
+        {
+          "value": "Yes",
+          "label": "Yes"
+        },
+        {
+          "value": "No",
+          "label": "No"
+        }
+      ]
+    },
+    {
+      "id": "aedTraining",
+      "text": "Has the caregiver received AED training?",
+      "type": "radio",
+      "required": true,
+      "visible": false,
+      "options": [
+        {
+          "value": "Yes",
+          "label": "Yes"
+        },
+        {
+          "value": "No",
+          "label": "No"
+        }
+      ]
+    }
+  ],
+  "coverageWarnings": [
+    {
+      "id": "minorMedication",
+      "message": "Coverage may be limited for minors with medication history.",
+      "level": "warning",
+      "visible": false
+    },
+    {
+      "id": "allergiesWarning",
+      "message": "Multiple allergies may require additional documentation.",
+      "level": "info",
+      "visible": false
+    },
+    {
+      "id": "aedCoverageDenied",
+      "message": "Patient may not be covered for an Automated External Defibrillator (AED) if they don\u2019t meet any of the qualifying criteria.",
+      "level": "warning",
+      "visible": false
+    }
+  ],
+  "payorPlan": "Medicare",
+  "state": "CA",
+  "product": "AED"
+}

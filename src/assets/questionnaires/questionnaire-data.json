@@ -1,0 +1,138 @@
+{
+  "questions": [
+    {
+      "id": "ventricularFibrillation",
+      "text": "Does the patient have a documented episode of ventricular fibrillation or a sustained, lasting 30 seconds or longer, ventricular tachyarrhythmia?",
+      "type": "radio",
+      "required": true,
+      "visible": true,
+      "options": [
+        { "value": "Yes", "label": "Yes" },
+        { "value": "No", "label": "No" }
+      ]
+    },
+    {
+      "id": "inheritedConditions",
+      "text": "Does the patient have familial or inherited conditions with a high risk of life-threatening ventricular tachyarrhythmias such as long QT syndrome or hypertrophic cardiomyopathy?",
+      "type": "radio",
+      "required": true,
+      "visible": false,
+      "options": [
+        { "value": "Yes", "label": "Yes" },
+        { "value": "No", "label": "No" }
+      ]
+    },
+    {
+      "id": "cardiomyopathyHistory",
+      "text": "Does the patient have either documented prior myocardial infarction or dilated cardiomyopathy and a measured left ventricular ejection fraction less than or equal to 0.35?",
+      "type": "radio",
+      "required": true,
+      "visible": false,
+      "options": [
+        { "value": "Yes", "label": "Yes" },
+        { "value": "No", "label": "No" }
+      ]
+    },
+    {
+      "id": "defibrillatorExplanted",
+      "text": "Does the patient need to have a previously implanted defibrillator explanted?",
+      "type": "radio",
+      "required": true,
+      "visible": false,
+      "options": [
+        { "value": "Yes", "label": "Yes" },
+        { "value": "No", "label": "No" }
+      ]
+    },
+    {
+      "id": "age",
+      "text": "What is your age?",
+      "type": "number",
+      "required": true,
+      "visible": true,
+      "validations": {
+        "min": 0,
+        "max": 120
+      }
+    },
+    {
+      "id": "medicationHistory",
+      "text": "Do you have a history of medication use?",
+      "type": "radio",
+      "required": true,
+      "visible": true,
+      "options": [
+        {
+          "value": "yes",
+          "label": "Yes"
+        },
+        {
+          "value": "no",
+          "label": "No"
+        }
+      ]
+    },
+    {
+      "id": "medicationDetails",
+      "text": "Please provide details of your medication history:",
+      "type": "textarea",
+      "required": false,
+      "visible": false,
+      "validations": {
+        "maxLength": 500
+      }
+    },
+    {
+      "id": "allergies",
+      "text": "Do you have any allergies?",
+      "type": "checkbox",
+      "required": true,
+      "visible": true,
+      "options": [
+        {
+          "value": "penicillin",
+          "label": "Penicillin"
+        },
+        {
+          "value": "nsaids",
+          "label": "NSAIDs (like aspirin, ibuprofen)"
+        },
+        {
+          "value": "sulfa",
+          "label": "Sulfa drugs"
+        },
+        {
+          "value": "none",
+          "label": "No known allergies"
+        }
+      ]
+    },
+    {
+      "id": "diagnosisDate",
+      "text": "When were you first diagnosed?",
+      "type": "date",
+      "required": false,
+      "visible": false
+    }
+  ],
+  "coverageWarnings": [
+    {
+      "id": "minorMedication",
+      "message": "Coverage may be limited for minors with medication history.",
+      "level": "warning",
+      "visible": false
+    },
+    {
+      "id": "allergiesWarning",
+      "message": "Multiple allergies may require additional documentation.",
+      "level": "info",
+      "visible": false
+    },
+    {
+      "id": "aedCoverageDenied",
+      "message": "Patient may not be covered for an Automated External Defibrillator (AED) if they don't meet any of the qualifying criteria.",
+      "level": "warning",
+      "visible": false
+    }
+  ]
+} 

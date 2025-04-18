@@ -1,0 +1,42 @@
+[
+  {
+    "conditions": {
+      "all": [
+        {
+          "fact": "question",
+          "path": "$.mobilityLimitations",
+          "operator": "equal",
+          "value": "Yes"
+        }
+      ]
+    },
+    "event": {
+      "type": "showQuestions",
+      "params": {
+        "questions": [
+          "wheelchairTraining"
+        ]
+      }
+    }
+  },
+  {
+    "conditions": {
+      "all": [
+        {
+          "fact": "question",
+          "path": "$.mobilityLimitations",
+          "operator": "equal",
+          "value": "No"
+        }
+      ]
+    },
+    "event": {
+      "type": "coverageWarning",
+      "params": {
+        "warningId": "wheelchairDenied",
+        "questionId": "mobilityLimitations",
+        "message": "Wheelchair coverage not applicable without documented mobility limitations."
+      }
+    }
+  }
+]

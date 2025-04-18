@@ -1,0 +1,150 @@
+<div class="container">
+  <div class="card">
+    <div class="card-header">
+      <h2>LCD Coverage</h2>
+    </div>
+    <div class="card-body">
+      <!-- Product Quick Selection -->
+      <div class="product-selector">
+        <h3>Quick Product Selection:</h3>
+        <div class="product-buttons">
+          <button class="product-btn" 
+                  [ngClass]="{'selected': selectedQuestionnaireId === '1'}" 
+                  (click)="selectProduct('AED')">
+            <div>Product: AED</div>
+            <div>State: CA</div>
+            <div>Payor: Cigna</div>
+          </button>
+          <button class="product-btn" 
+                  [ngClass]="{'selected': selectedQuestionnaireId === '2'}" 
+                  (click)="selectProduct('CPAP')">
+            <div>Product: CPAP</div>
+            <div>State: TX</div>
+            <div>Payor: UnitedHealthcare</div>
+          </button>
+          <button class="product-btn" 
+                  [ngClass]="{'selected': selectedQuestionnaireId === '3'}" 
+                  (click)="selectProduct('Wheelchair')">
+            <div>Product: Wheelchair</div>
+            <div>State: NY</div>
+            <div>Payor: Aetna</div>
+          </button>
+          <button class="product-btn primary" 
+                  [ngClass]="{'selected': selectedQuestionnaireId === '4'}" 
+                  (click)="selectProduct('Oxygen Concentrator')">
+            <div>Product: Oxygen Concentrator</div>
+            <div>State: FL</div>
+            <div>Payor: BlueCross</div>
+          </button>
+          <button class="product-btn lcd" 
+                  [ngClass]="{'selected': selectedQuestionnaireId === '5'}"
+                  (click)="selectProduct('LCD')">
+            <div>Product: LCD</div>
+            <div>State: All</div>
+            <div>Payor: Medicare</div>
+          </button>
+        </div>
+      </div>
+      
+      <div class="questions-container">
+        <div *ngFor="let question of questions" class="question-item" [ngClass]="{'hidden': !question.visible}">
+          <div class="question-text">{{ question.text }}</div>
+          
+          <!-- Different input types based on question -->
+          <div class="question-input">
+            <!-- For number input -->
+            <input *ngIf="question.type === 'number'" 
+                  type="number" 
+                  [(ngModel)]="question.answer" 
+                  (input)="onAnswerQuestion(question, question.answer)"
+                  class="form-control"
+                  [required]="question.required"
+                  [attr.min]="question.validations?.min ?? null"
+                  [attr.max]="question.validations?.max ?? null">
+            
+            <!-- For text input -->
+            <input *ngIf="question.type === 'text'" 
+                  type="text" 
+                  [(ngModel)]="question.answer" 
+                  (input)="onAnswerQuestion(question, question.answer)"
+                  class="form-control"
+                  [required]="question.required">
+                  
+            <!-- For date input -->
+            <input *ngIf="question.type === 'date'" 
+                  type="date" 
+                  [(ngModel)]="question.answer" 
+                  (change)="onAnswerQuestion(question, question.answer)"
+                  class="form-control"
+                  [required]="question.required">
+            
+            <!-- For radio options (now side by side) -->
+            <div *ngIf="question.type === 'radio' && question.options" class="radio-group horizontal">
+              <div *ngFor="let option of question.options" class="radio-item">
+                <input type="radio" 
+                      [id]="question.id + '-' + option.value" 
+                      [name]="question.id" 
+                      [value]="option.value" 
+                      [(ngModel)]="question.answer" 
+                      (change)="onAnswerQuestion(question, option.value)"
+                      [required]="question.required">
+                <label [for]="question.id + '-' + option.value">{{ option.label }}</label>
+              </div>
+            </div>
+            
+            <!-- For checkbox options -->
+            <div *ngIf="question.type === 'checkbox' && question.options" class="checkbox-group">
+              <div *ngFor="let option of question.options" class="checkbox-item">
+                <input type="checkbox" 
+                      [id]="question.id + '-' + option.value" 
+                      [value]="option.value" 
+                      (change)="onCheckboxChange(question, option.value, $event)"
+                      [required]="question.required && !question.answer?.length">
+                <label [for]="question.id + '-' + option.value">{{ option.label }}</label>
+              </div>
+            </div>
+            
+            <!-- For textarea -->
+            <textarea *ngIf="question.type === 'textarea'" 
+                    [(ngModel)]="question.answer" 
+                    (input)="onAnswerQuestion(question, question.answer)"
+                    class="form-control"
+                    rows="3"
+                    [required]="question.required"
+                    [attr.maxlength]="question.validations?.maxLength ?? null"></textarea>
+          </div>
+          
+          <!-- Inline warnings related to this question -->
+          <div *ngFor="let warning of getRelatedWarnings(question)" 
+              class="warning-item inline-warning" 
+              [ngClass]="{'hidden': !warning.visible, 'warning': warning.level === 'warning', 'info': warning.level === 'info', 'error': warning.level === 'error'}">
+            <div class="warning-icon">
+              <span *ngIf="warning.level === 'warning'">⚠️</span>
+              <span *ngIf="warning.level === 'info'">ℹ️</span>
+              <span *ngIf="warning.level === 'error'">❌</span>
+            </div>
+            <div class="warning-text">{{ warning.message }}</div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Additional warnings (unaffiliated with specific questions) -->
+      <div class="warnings-container">
+        <div *ngFor="let warning of getUnrelatedWarnings()" 
+            class="warning-item" 
+            [ngClass]="{'hidden': !warning.visible, 'warning': warning.level === 'warning', 'info': warning.level === 'info', 'error': warning.level === 'error'}">
+          <div class="warning-icon">
+            <span *ngIf="warning.level === 'warning'">⚠️</span>
+            <span *ngIf="warning.level === 'info'">ℹ️</span>
+            <span *ngIf="warning.level === 'error'">❌</span>
+          </div>
+          <div class="warning-text">{{ warning.message }}</div>
+        </div>
+      </div>
+      
+      <div class="action-buttons">
+        <button class="reset-button" (click)="resetQuestionnaire()">Reset</button>
+      </div>
+    </div>
+  </div>
+</div>

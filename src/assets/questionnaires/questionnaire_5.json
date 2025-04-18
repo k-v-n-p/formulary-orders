@@ -1,0 +1,165 @@
+{
+  "questions": [
+    {
+      "id": "ventricularFibrillation",
+      "text": "Does the patient have a documented episode of cardiac arrest due to ventricular fibrillation?",
+      "type": "radio",
+      "required": true,
+      "visible": true,
+      "options": [
+        {
+          "value": "Yes",
+          "label": "Yes"
+        },
+        {
+          "value": "No",
+          "label": "No"
+        }
+      ]
+    },
+    {
+      "id": "inheritedConditions",
+      "text": "Does the patient have documented familial or inherited conditions with a high risk of life-threatening tachyarrhythmias?",
+      "type": "radio",
+      "required": true,
+      "visible": false,
+      "options": [
+        {
+          "value": "Yes",
+          "label": "Yes"
+        },
+        {
+          "value": "No",
+          "label": "No"
+        }
+      ]
+    },
+    {
+      "id": "cardiomyopathyHistory",
+      "text": "Does the patient have a documented history of coronary artery disease with a previous myocardial infarction?",
+      "type": "radio",
+      "required": true,
+      "visible": false,
+      "options": [
+        {
+          "value": "Yes",
+          "label": "Yes"
+        },
+        {
+          "value": "No",
+          "label": "No"
+        }
+      ]
+    },
+    {
+      "id": "defibrillatorExplanted",
+      "text": "Has the patient had a previously implanted defibrillator removed due to infection?",
+      "type": "radio",
+      "required": true,
+      "visible": false,
+      "options": [
+        {
+          "value": "Yes",
+          "label": "Yes"
+        },
+        {
+          "value": "No",
+          "label": "No"
+        }
+      ]
+    },
+    {
+      "id": "medicationHistory",
+      "text": "Is the patient currently taking any arrhythmia medications?",
+      "type": "radio",
+      "required": true,
+      "visible": true,
+      "options": [
+        {
+          "value": "yes",
+          "label": "Yes"
+        },
+        {
+          "value": "no",
+          "label": "No"
+        }
+      ]
+    },
+    {
+      "id": "medicationDetails",
+      "text": "Please list all arrhythmia medications the patient is taking:",
+      "type": "textarea",
+      "required": true,
+      "visible": false,
+      "validations": {
+        "maxLength": 500
+      }
+    },
+    {
+      "id": "allergies",
+      "text": "Does the patient have any allergies to medications?",
+      "type": "checkbox",
+      "required": true,
+      "visible": true,
+      "options": [
+        {
+          "value": "penicillin",
+          "label": "Penicillin"
+        },
+        {
+          "value": "sulfa",
+          "label": "Sulfa Drugs"
+        },
+        {
+          "value": "nsaids",
+          "label": "NSAIDs"
+        },
+        {
+          "value": "other",
+          "label": "Other"
+        }
+      ]
+    },
+    {
+      "id": "diagnosisDate",
+      "text": "When was the patient diagnosed with their current cardiac condition?",
+      "type": "date",
+      "required": true,
+      "visible": false
+    },
+    {
+      "id": "age",
+      "text": "Patient's age",
+      "type": "number",
+      "required": true,
+      "visible": true,
+      "validations": {
+        "min": 0,
+        "max": 120
+      }
+    }
+  ],
+  "coverageWarnings": [
+    {
+      "id": "minorMedication",
+      "message": "Coverage may be limited for minors with medication history.",
+      "level": "warning",
+      "visible": false
+    },
+    {
+      "id": "defibrillatorWarning",
+      "message": "Patient may not be covered for an Automated External Defibrillator (AED) if they don't meet any of the qualifying criteria.",
+      "level": "warning",
+      "visible": false
+    },
+    {
+      "id": "allergiesWarning",
+      "message": "Multiple allergies may require additional documentation.",
+      "level": "info",
+      "visible": false
+    }
+  ],
+  "payorPlan": "Medicare",
+  "state": "All",
+  "product": "LCD"
+} 

@@ -1,0 +1,48 @@
+[
+  {
+    "conditions": {
+      "all": [
+        {
+          "fact": "question",
+          "path": "$.ventricularFibrillation",
+          "operator": "equal",
+          "value": "No"
+        }
+      ]
+    },
+    "event": {
+      "type": "showQuestions",
+      "params": {
+        "questions": [
+          "aedTraining"
+        ]
+      }
+    }
+  },
+  {
+    "conditions": {
+      "all": [
+        {
+          "fact": "question",
+          "path": "$.ventricularFibrillation",
+          "operator": "equal",
+          "value": "No"
+        },
+        {
+          "fact": "question",
+          "path": "$.aedTraining",
+          "operator": "equal",
+          "value": "No"
+        }
+      ]
+    },
+    "event": {
+      "type": "coverageWarning",
+      "params": {
+        "warningId": "aedNotEligible",
+        "questionId": "aedTraining",
+        "message": "AED may not be covered if no recent episode and caregiver is untrained."
+      }
+    }
+  }
+]

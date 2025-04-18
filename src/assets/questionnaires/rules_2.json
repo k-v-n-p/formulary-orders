@@ -1,0 +1,42 @@
+[
+  {
+    "conditions": {
+      "all": [
+        {
+          "fact": "question",
+          "path": "$.sleepStudy",
+          "operator": "equal",
+          "value": "Yes"
+        }
+      ]
+    },
+    "event": {
+      "type": "showQuestions",
+      "params": {
+        "questions": [
+          "cpapUsage"
+        ]
+      }
+    }
+  },
+  {
+    "conditions": {
+      "all": [
+        {
+          "fact": "question",
+          "path": "$.cpapUsage",
+          "operator": "equal",
+          "value": "No"
+        }
+      ]
+    },
+    "event": {
+      "type": "coverageWarning",
+      "params": {
+        "warningId": "cpapNotUsable",
+        "questionId": "cpapUsage",
+        "message": "Coverage may be denied if patient cannot use CPAP independently."
+      }
+    }
+  }
+]

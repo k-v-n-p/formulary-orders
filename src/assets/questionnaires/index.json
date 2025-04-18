@@ -1,0 +1,32 @@
+[
+  {
+    "id": "1",
+    "product": "AED",
+    "payorPlan": "Cigna",
+    "state": "CA"
+  },
+  {
+    "id": "2",
+    "product": "CPAP",
+    "payorPlan": "UnitedHealthcare",
+    "state": "TX"
+  },
+  {
+    "id": "3",
+    "product": "Wheelchair",
+    "payorPlan": "Aetna",
+    "state": "NY"
+  },
+  {
+    "id": "4",
+    "product": "Oxygen Concentrator",
+    "payorPlan": "BlueCross",
+    "state": "FL"
+  },
+  {
+    "id": "5",
+    "product": "LCD",
+    "payorPlan": "Medicare",
+    "state": "All"
+  }
+] 

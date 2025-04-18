@@ -1,0 +1,161 @@
+[
+  {
+    "conditions": {
+      "all": [
+        {
+          "fact": "question",
+          "path": "$.ventricularFibrillation",
+          "operator": "equal",
+          "value": "No"
+        }
+      ]
+    },
+    "event": {
+      "type": "showQuestions",
+      "params": {
+        "questions": ["inheritedConditions"]
+      }
+    }
+  },
+  {
+    "conditions": {
+      "all": [
+        {
+          "fact": "question",
+          "path": "$.inheritedConditions",
+          "operator": "equal",
+          "value": "No"
+        }
+      ]
+    },
+    "event": {
+      "type": "showQuestions",
+      "params": {
+        "questions": ["cardiomyopathyHistory"]
+      }
+    }
+  },
+  {
+    "conditions": {
+      "all": [
+        {
+          "fact": "question",
+          "path": "$.cardiomyopathyHistory",
+          "operator": "equal",
+          "value": "No"
+        }
+      ]
+    },
+    "event": {
+      "type": "showQuestions",
+      "params": {
+        "questions": ["defibrillatorExplanted"]
+      }
+    }
+  },
+  {
+    "conditions": {
+      "all": [
+        {
+          "fact": "question",
+          "path": "$.defibrillatorExplanted",
+          "operator": "equal",
+          "value": "No"
+        }
+      ]
+    },
+    "event": {
+      "type": "coverageWarning",
+      "params": {
+        "warningId": "defibrillatorWarning",
+        "questionId": "defibrillatorExplanted",
+        "message": "Patient may not be covered for an Automated External Defibrillator (AED) if they don't meet any of the qualifying criteria."
+      }
+    }
+  },
+  {
+    "conditions": {
+      "all": [{
+        "fact": "question",
+        "path": "$.medicationHistory",
+        "operator": "equal",
+        "value": "yes"
+      }]
+    },
+    "event": {
+      "type": "showQuestions",
+      "params": {
+        "questions": ["medicationDetails"]
+      }
+    }
+  },
+  {
+    "conditions": {
+      "all": [{
+        "fact": "question",
+        "path": "$.age",
+        "operator": "lessThan",
+        "value": 18
+      }, {
+        "fact": "question",
+        "path": "$.medicationHistory",
+        "operator": "equal",
+        "value": "yes"
+      }]
+    },
+    "event": {
+      "type": "coverageWarning",
+      "params": {
+        "warningId": "minorMedication",
+        "questionId": "medicationHistory",
+        "message": "Coverage may be limited for minors with medication history."
+      }
+    }
+  },
+  {
+    "conditions": {
+      "all": [{
+        "fact": "question",
+        "path": "$.allergies",
+        "operator": "contains",
+        "value": "penicillin"
+      }]
+    },
+    "event": {
+      "type": "showQuestions",
+      "params": {
+        "questions": ["diagnosisDate"]
+      }
+    }
+  },
+  {
+    "conditions": {
+      "any": [
+        {
+          "all": [
+            {
+              "fact": "question",
+              "path": "$.allergies",
+              "operator": "notEqual",
+              "value": null
+            },
+            {
+              "fact": "question",
+              "path": "$.allergies.length",
+              "operator": "greaterThan",
+              "value": 2
+            }
+          ]
+        }
+      ]
+    },
+    "event": {
+      "type": "coverageWarning",
+      "params": {
+        "warningId": "allergiesWarning",
+        "questionId": "allergies",
+        "message": "Multiple allergies may require additional documentation."
+      }
+    }
+  }
+] 
