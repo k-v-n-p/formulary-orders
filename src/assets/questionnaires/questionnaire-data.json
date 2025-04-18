@@ -1,6 +1,17 @@
 {
   "questions": [
     {
+      "id": "age",
+      "text": "What is your age?",
+      "type": "number",
+      "required": true,
+      "visible": true,
+      "validations": {
+        "min": 0,
+        "max": 120
+      }
+    },
+    {
       "id": "ventricularFibrillation",
       "text": "Does the patient have a documented episode of ventricular fibrillation or a sustained, lasting 30 seconds or longer, ventricular tachyarrhythmia?",
       "type": "radio",
@@ -43,17 +54,6 @@
         { "value": "Yes", "label": "Yes" },
         { "value": "No", "label": "No" }
       ]
-    },
-    {
-      "id": "age",
-      "text": "What is your age?",
-      "type": "number",
-      "required": true,
-      "visible": true,
-      "validations": {
-        "min": 0,
-        "max": 120
-      }
     },
     {
       "id": "medicationHistory",

@@ -120,6 +120,12 @@ h1 {
       color: #333;
       line-height: 1.5;
       font-size: 16px;
+      
+      .required-indicator {
+        color: #e74c3c;
+        margin-left: 4px;
+        font-weight: bold;
+      }
     }
 
     .question-input {
@@ -202,6 +208,19 @@ h1 {
 
 .warnings-container {
   margin-top: 30px;
+}
+
+.required-note {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  font-size: 14px;
+  color: #666;
+  font-style: italic;
+  
+  .required-indicator {
+    color: #e74c3c;
+    font-weight: bold;
+  }
 }
 
 // Common styles for all warnings
@@ -316,48 +335,6 @@ h1 {
         background-color: #e4e4e4;
         transform: translateY(-2px);
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      }
-      
-      &.primary {
-        background-color: #e6f7ff;
-        border-color: #91d5ff;
-        
-        div:first-child {
-          color: #1890ff;
-        }
-        
-        &:hover {
-          background-color: #bae7ff;
-        }
-        
-        &.selected {
-          background-color: #bae7ff;
-          
-          &::after {
-            border-color: #1890ff;
-          }
-        }
-      }
-      
-      &.lcd {
-        background-color: #f6ffed;
-        border-color: #b7eb8f;
-        
-        div:first-child {
-          color: #52c41a;
-        }
-        
-        &:hover {
-          background-color: #d9f7be;
-        }
-        
-        &.selected {
-          background-color: #d9f7be;
-          
-          &::after {
-            border-color: #52c41a;
-          }
-        }
       }
     }
   }

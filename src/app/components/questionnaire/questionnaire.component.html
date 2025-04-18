@@ -29,14 +29,14 @@
             <div>State: NY</div>
             <div>Payor: Aetna</div>
           </button>
-          <button class="product-btn primary" 
+          <button class="product-btn" 
                   [ngClass]="{'selected': selectedQuestionnaireId === '4'}" 
                   (click)="selectProduct('Oxygen Concentrator')">
             <div>Product: Oxygen Concentrator</div>
             <div>State: FL</div>
             <div>Payor: BlueCross</div>
           </button>
-          <button class="product-btn lcd" 
+          <button class="product-btn" 
                   [ngClass]="{'selected': selectedQuestionnaireId === '5'}"
                   (click)="selectProduct('LCD')">
             <div>Product: LCD</div>
@@ -48,7 +48,10 @@
       
       <div class="questions-container">
         <div *ngFor="let question of questions" class="question-item" [ngClass]="{'hidden': !question.visible}">
-          <div class="question-text">{{ question.text }}</div>
+          <div class="question-text">
+            {{ question.text }}
+            <span *ngIf="question.required" class="required-indicator">*</span>
+          </div>
           
           <!-- Different input types based on question -->
           <div class="question-input">
@@ -142,6 +145,10 @@
         </div>
       </div>
       
+      <!-- <div class="required-note">
+        <span class="required-indicator">*</span> indicates required fields
+      </div> -->
+
       <div class="action-buttons">
         <button class="reset-button" (click)="resetQuestionnaire()">Reset</button>
       </div>
